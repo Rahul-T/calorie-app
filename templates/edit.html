@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	</head>
+
+	<h1>Edit Data</h1>
+	<h4><a href="/"">Return Home</a></h4>
+
+	{% if errorMessage %}
+		<div>
+			{{errorMessage}}
+		</div>
+	{% endif %}
+
+	<form name="myForm" method="POST" action="/edit">
+
+		<p><div> <input type="submit"> </input> </div><p>
+
+		<table id="cals">
+			<thead>
+				<tr>
+				    <th>Track Date</th>
+				    <th>Calories</th>
+				    <th>Carbs</th>
+				    <th>Protein</th>
+				    <th>Fat</th>
+				    <th>Weight</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td> <input type="text" name="date"></input> </td>
+					<td> <input type="text" name="calories"></input> </td>
+					<td> <input type="text" name="carbs"></input> </td>
+					<td> <input type="text" name="protein"></input> </td>
+					<td> <input type="text" name="fat"></input> </td>
+					<td> <input type="text" name="weight"></input> </td>
+					<td id="flag" style="display:none;"> <input type="text" name="flag" value="0"></input> </td>
+				</tr>
+				{% for item in result %}
+				<tr>
+					<td> <input type="text" name="date" value={{item[0]}}></input> </td>
+					<td> <input type="text" name="calories" value={{item[1]}}></input> </td>
+					<td> <input type="text" name="carbs" value={{item[2]}}></input> </td>
+					<td> <input type="text" name="protein" value={{item[3]}}></input> </td>
+					<td> <input type="text" name="fat" value={{item[4]}}></input> </td>
+					<td> <input type="text" name="weight" value={{item[5]}}></input> </td>
+					<td id="flag" style="display:none;"> <input type="text" name="flag" value={{item[6]}}></input> </td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		
+		</table>
+
+	</form>
+
+
+	<script>
+			$(document).ready(function() {
+                $('#cals td').change(function() {
+					var rowEdit = $(this).parents('tr');				
+					$(rowEdit).children('#flag').find('input').val("1");
+                })
+            })
+	</script>
+
+
+</html>
